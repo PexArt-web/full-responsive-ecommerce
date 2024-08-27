@@ -1,5 +1,5 @@
 import { NavLink, useLoaderData } from "react-router-dom";
-import ProductCard from "../myComponents/ProductCard";
+import ProductCard from "../myComponents/cardComponent/ProductCard";
 
 import HomepageBanner from "../myComponents/HomepageBanner";
 
