@@ -1,14 +1,16 @@
 import { Outlet } from "react-router-dom";
 import Nav from "../myComponents/Nav";
 
+
 const RootLayout = () => {
   return (
     <div>
       <header>
-        <Nav/>
+        <Nav />
       </header>
-
-      <Outlet />
+      <main>
+        <Outlet/>
+      </main>
     </div>
   );
 };
