@@ -12,7 +12,7 @@ const Nav = () => {
             <Link to={'/'}>
             <img src={BrandLogo} alt="Brand Logo" className="h-20 w-auto" />
             </Link>
-          <NavLink to={"/"}>PexLuxora</NavLink>
+          <Link to={"/"}>PexLuxora</Link>
         </div>
 
         <div className="space-x-8 hidden md:flex">

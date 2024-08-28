@@ -67,3 +67,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+a{
+  transition: color 0.3s ease;
+}
+
+/* a:hover {
+  color: #3182ce !important;
+} */
+
+.active {
+  color: #2b6cb0;
+  border-bottom: 2px solid #2b6cb0;
+  font-weight: bold;
+}

@@ -1,27 +1,14 @@
-const CreateAccount = () => {
+
+
+const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Sign Up
+          Log In
         </h2>
 
         <form className="space-y-4">
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              placeholder="John Doe"
-            />
-          </div>
-
           <div>
             <label
               htmlFor="email"
@@ -53,31 +40,42 @@ const CreateAccount = () => {
           </div>
 
           <div className="flex items-center justify-between">
-            <label
-              htmlFor="terms"
-              className="flex items-center text-sm text-gray-600"
-            >
+            <div className="flex items-center">
               <input
                 type="checkbox"
-                id="terms"
+                id="remember_me"
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="ml-2">I agree to the terms and conditions</span>
-            </label>
+              <label
+                htmlFor="remember_me"
+                className="ml-2 block text-sm text-gray-600"
+              >
+                Remember me
+              </label>
+            </div>
+
+            <div>
+              <a
+                href="/forgot-password"
+                className="text-sm text-blue-600 hover:underline"
+              >
+                Forgot your password?
+              </a>
+            </div>
           </div>
 
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            Sign Up
+            Log In
           </button>
         </form>
 
         <p className="mt-4 text-center text-sm text-gray-600">
-          Already have an account?
-          <a href="/login" className="text-blue-600 hover:underline">
-            Log In
+          Don’t have an account?{" "}
+          <a href="/create-account" className="text-blue-600 hover:underline">
+            Sign Up
           </a>
         </p>
       </div>
@@ -85,4 +83,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default Login;
