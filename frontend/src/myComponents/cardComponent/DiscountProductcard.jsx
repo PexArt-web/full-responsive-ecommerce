@@ -1,25 +1,28 @@
 import { useState } from "react";
 
 
-const ProductCard = ({ title, image, price, originalPrice, discountPercent, rating }) => {
+const DiscountProductCard = ({ name, imageURL, description, price }) => {
   
   const [isFavorite, setIsFavorite] = useState(false);
+  const [discountPercent, setDiscountPercent] = useState(20);
+  const [originalPrice, setOriginalPrice] = useState(12)
+  const [rating, setRating] = useState()
 
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
   };
 
   return (
-    <div className="relative bg-white shadow-md rounded-lg overflow-hidden w-72">
-      {/* Discount Badge */}
+    <div className="relative bg-white hover:shadow-lg rounded-lg overflow-hidden w-72">
+    
       {discountPercent > 0 && (
-        <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-bold px-2 py-1">
-          {discountPercent}% OFF
+        <div className="absolute top-1 left-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
+          {discountPercent}% OFF  
         </div>
       )}
 
-      {/* Product Image */}
-      <img src={image} alt={title} className="w-full h-48 object-cover" />
+      
+      <img src={imageURL} alt={name} className="w-full h-48 object-cover" />
 
       {/* Favorite Heart Button */}
       <button
@@ -29,7 +32,7 @@ const ProductCard = ({ title, image, price, originalPrice, discountPercent, rati
         {isFavorite ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="red"
+            fill="gold"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
@@ -61,7 +64,7 @@ const ProductCard = ({ title, image, price, originalPrice, discountPercent, rati
 
       {/* Product Details */}
       <div className="p-4">
-        <h3 className="font-bold text-lg">{title}</h3>
+        <h3 className="font-bold text-lg">{name}</h3>
         
         {/* Price & Discount */}
         <div className="flex items-center space-x-2 mt-2">
@@ -72,16 +75,16 @@ const ProductCard = ({ title, image, price, originalPrice, discountPercent, rati
         </div>
 
         {/* Star Rating */}
-        <div className="flex items-center space-x-1 mt-2">
+        {/* <div className="flex items-center space-x-1 mt-2">
           {Array.from({ length: 5 }, (_, index) => (
             <span key={index} className={index < rating ? "text-yellow-400" : "text-gray-300"}>
               ⭐
             </span>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default ProductCard;
+export default DiscountProductCard;

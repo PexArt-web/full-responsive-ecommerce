@@ -15,7 +15,6 @@ const Nav = () => {
           <NavLink to={"/"}>PexLuxora</NavLink>
         </div>
 
-        {/* Navigation Links */}
         <div className="space-x-8 hidden md:flex">
           <NavLink to ="/" className="text-gray-600 hover:text-gray-900">
             Home
@@ -31,7 +30,6 @@ const Nav = () => {
           </NavLink>
         </div>
 
-        {/* Call to Action & User Account */}
         <div className="flex items-center space-x-4">
           {!noSign.includes(location.pathname) &&<NavLink to="/create-account" className="text-gray-600 hover:text-gray-900">
             Sign Up

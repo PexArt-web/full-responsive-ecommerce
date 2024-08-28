@@ -13,10 +13,8 @@ const ProductCard = ({ name, imageURL, description, price }) => {
       <div className="p-4">
         <h2 className="text-lg font-semibold text-gray-800 truncate">{name}</h2>
 
-        {/* Product Price */}
         <p className="mt-2 text-gray-600 text-xl">${price}</p>
 
-        {/* Product Description */}
         <p className="text-gray-500 mt-2 text-sm">
           {description.length > 60
             ? `${description.slice(0, 60)}...`
