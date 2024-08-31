@@ -1,4 +1,4 @@
-import NotFoundGif from "../assets/images/404/404.gif";
+import NotFoundGif from "../../assets/images/404/404.gif";
 const NotFound = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">

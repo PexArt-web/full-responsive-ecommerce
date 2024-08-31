@@ -5,6 +5,7 @@ const port = process.env.PORT
 const morgan = require('morgan')
 const cors = require('cors')
 const productRouter = require('./routes/productsRoutes')
+const userRouter = require('./routes/userRoute')
 const { connectDatabase } = require('./config/database')
 // middlewares
 app.use(morgan('dev'))
@@ -14,6 +15,7 @@ app.use(cors())
 const { log } = console
 
 // routes
+app.use('/api/user', userRouter)
 app.use('/api/products', productRouter)
 
 
