@@ -1,10 +1,16 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import BrandLogo from "../assets/images/BrandLogo/BLogo.png";
+import { useLogout } from "../hooks/useLogout";
 
 const Nav = () => {
     const location = useLocation()
     const noSign = ['/create-account']
     const noLogin =  ['account/login']
+    // const logOut = ['/']
+    const {logout } = useLogout()
+    const handleClick = () => {
+    logout()
+    }
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
@@ -40,6 +46,7 @@ const Nav = () => {
           >
             Login
           </NavLink>}
+          <Link to={'/'} className="px-4 py-2 bg-red-600 text-white rounded hover:bg-blue-700" onClick={handleClick}>Log out</Link>
           <NavLink to="/cart" className="text-gray-600 hover:text-gray-900 hidden">
             Cart (0)
           </NavLink>
