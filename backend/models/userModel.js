@@ -43,12 +43,12 @@ userSchema.statics.signup = async function (
     if (!email || !password || !firstName || !lastName || !username) {
       throw new Error(`all fields must be filled`);
     }
-   if(!validator.isEmail(email)){
-     throw new Error(`Invalid email format: ${email}`)
-   }
-   if (!validator.isStrongPassword(password)){
-     throw new Error(`Password not strong enough`)
-   }
+    if (!validator.isEmail(email)) {
+      throw new Error(`Invalid email format: ${email}`);
+    }
+    if (!validator.isStrongPassword(password)) {
+      throw new Error(`Password not strong enough`);
+    }
 
     const existingUser = await this.findOne({ email });
     if (existingUser) {
@@ -73,6 +73,35 @@ userSchema.statics.signup = async function (
     });
 
     return newUser;
+  } catch (error) {
+    throw new Error(`${error.message}`);
+  }
+};
+
+// static login method
+
+userSchema.statics.login = async function (email, password) {
+  try {
+    if (!email || !password) {
+      throw new Error(`All fields are required`);
+    }
+
+    const exisitingUser = await this.findOne({ email });
+
+    if (!exisitingUser) {
+      throw new Error(`invalid email`);
+    }
+
+    const matchPassword = await bcrypt.compare(
+      password,
+      exisitingUser.password
+    );
+
+    if (!matchPassword) {
+      throw new Error(` passwords do not match`);
+    }
+
+    return exisitingUser;
   } catch (error) {
     throw new Error(`${error.message}`);
   }
