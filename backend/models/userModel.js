@@ -7,52 +7,41 @@ const validator = require("validator");
 // Define the user schema
 
 const userSchema = new Schema({
-  username: {
+  name: {
     type: String,
-    required: true,
-  },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
+    required: [true, "Name is required"]
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "Email is required"],
     unique: true,
+    validate: [validator.isEmail, "Please provide a valid email address"],
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "Password is required"]
   },
 });
 
 // static sign up method
 
-userSchema.statics.signup = async function (
-  username,
-  email,
-  password,
-  firstName,
-  lastName
-) {
+userSchema.statics.signup = async function (name, email, password) {
   try {
-    if (!email || !password || !firstName || !lastName || !username) {
-      throw new Error(`all fields must be filled`);
+    if (!email || !password || !name) {
+      throw Error(
+        `It seems you've left some fields empty, please complete the form.`
+      );
     }
     if (!validator.isEmail(email)) {
-      throw new Error(`Invalid email format: ${email}`);
+      throw Error(`Invalid email format: ${email}`);
     }
     if (!validator.isStrongPassword(password)) {
-      throw new Error(`Password not strong enough`);
+      throw Error(`Password not strong enough`);
     }
 
     const existingUser = await this.findOne({ email });
     if (existingUser) {
-      throw new Error(`User ${email} already exists`);
+      throw Error(`User ${email} already exists`);
     }
 
     // generate salt for password hashing
@@ -65,16 +54,14 @@ userSchema.statics.signup = async function (
 
     // creating or signing up new user
     const newUser = await this.create({
-      username: username,
+     name: name,
       password: hashedPassword,
-      firstName: firstName,
-      lastName: lastName,
       email: email,
     });
 
     return newUser;
   } catch (error) {
-    throw new Error(`${error.message}`);
+    throw Error(`${error.message}`);
   }
 };
 

@@ -1,4 +1,17 @@
+import { useSignup } from "../../hooks/useSignUp";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 const CreateAccount = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { signup, isLoading, error } = useSignup();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signup(name, email, password);
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
@@ -6,7 +19,7 @@ const CreateAccount = () => {
           Sign Up
         </h2>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="name"
@@ -19,6 +32,11 @@ const CreateAccount = () => {
               id="name"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               placeholder="John Doe"
+              required
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              value={name}
             />
           </div>
 
@@ -34,6 +52,11 @@ const CreateAccount = () => {
               id="email"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               placeholder="you@example.com"
+              required
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              value={email}
             />
           </div>
 
@@ -49,10 +72,15 @@ const CreateAccount = () => {
               id="password"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               placeholder="••••••••"
+              required
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              value={password}
             />
           </div>
 
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <label
               htmlFor="terms"
               className="flex items-center text-sm text-gray-600"
@@ -64,21 +92,25 @@ const CreateAccount = () => {
               />
               <span className="ml-2">I agree to the terms and conditions</span>
             </label>
-          </div>
+          </div> */}
 
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            disabled={isLoading}
           >
-            Sign Up
+            {isLoading ? "Signing up..." : "Sign Up"}
           </button>
+          {error && (
+            <div className="mt-4 text-red-600 text-center">{error}</div>
+          )}
         </form>
 
         <p className="mt-4 text-center text-sm text-gray-600">
           Already have an account?
-          <a href="/login" className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-blue-600 hover:underline">
             Log In
-          </a>
+          </Link>
         </p>
       </div>
     </div>

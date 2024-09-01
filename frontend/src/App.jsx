@@ -9,7 +9,7 @@ import CreateAccount from "./pages/Authentication/CreateAccount";
 import NotFound from "./pages/Errors/NotFound";
 import Home from "./pages/Home";
 import { productsLoader } from "./services/productService";
-import Login from "./pages/Login";
+import Login from "./pages/Authentication/Login";
 import LoadErrorPage from "./pages/Errors/ErrorPage";
 function App() {
   const router = createBrowserRouter(
