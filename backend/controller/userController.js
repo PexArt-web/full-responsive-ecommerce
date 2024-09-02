@@ -34,13 +34,16 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
+    if(!user){
+      throw Error('Invalid email or password');
+    }
     // creating a new user token
     const token = createToken(user._id);
     res
       .status(200)
       .json({ userEmail: email, token: token });
   } catch (error) {
-    res.status(400).json({ message: `errror: ${error.message}` });
+    res.status(400).json({ error: `error: ${error.message}` });
   }
 };
 

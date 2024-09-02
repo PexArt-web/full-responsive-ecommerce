@@ -1,6 +1,19 @@
+import { useLogin } from "../../hooks/useLogin";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+  const [email, setEmail ] = useState('')
+  const [password, setPassword] = useState('')
+  const { login , error, isLoading } = useLogin()
+  const navigate = useNavigate()
+
+  const handleClick = async (e) => {
+    e.preventDefault()
+    await login(email, password)
+      navigate('/')
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
@@ -8,7 +21,7 @@ const Login = () => {
           Log In
         </h2>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleClick}>
           <div>
             <label
               htmlFor="email"
@@ -21,6 +34,10 @@ const Login = () => {
               id="email"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               placeholder="you@example.com"
+              required
+              name="email"
+              onChange={(e)=> setEmail(e.target.value)}
+              value={email}
             />
           </div>
 
@@ -36,6 +53,9 @@ const Login = () => {
               id="password"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               placeholder="••••••••"
+              required
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
             />
           </div>
 
@@ -55,28 +75,32 @@ const Login = () => {
             </div>
 
             <div>
-              <a
-                href="/forgot-password"
+              <Link 
+                to="/forgot-password"
                 className="text-sm text-blue-600 hover:underline"
               >
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
 
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            disabled= {isLoading}
           >
-            Log In
+            {isLoading ? 'connecting' : 'Log in'}
           </button>
+          {error && (
+            <div className="mt-4 text-red-600 text-center">{error}</div>
+          )}
         </form>
 
         <p className="mt-4 text-center text-sm text-gray-600">
           Don’t have an account?{" "}
-          <a href="/create-account" className="text-blue-600 hover:underline">
+          <Link to="/create-account" className="text-blue-600 hover:underline">
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
