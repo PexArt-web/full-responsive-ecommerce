@@ -1,4 +1,4 @@
-import { NavLink, useLoaderData, Link } from "react-router-dom";
+import {  useLoaderData, Link } from "react-router-dom";
 // import ProductCard from "../myComponents/cardComponent/ProductCard";
 
 import HomepageBanner from "../myComponents/HomepageBanner";
