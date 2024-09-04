@@ -57,6 +57,23 @@ const getSingleProduct = async (req, res) => {
   }
 };
 
+// getProductByCategoryName
+const getProductsByCategory = async (req, res) => {
+  const { category } = req.params
+  const query = { category: category };
+
+  try {
+    const getProduct = await product.find(query);
+
+    if (!getProduct) {
+      throw Error("products category not found");
+    }
+    res.status(200).json(getProduct);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 // delete product
 
 const deleteProduct = async (req, res) => {
@@ -102,4 +119,5 @@ module.exports = {
   getSingleProduct,
   deleteProduct,
   updateProduct,
+  getProductsByCategory,
 };

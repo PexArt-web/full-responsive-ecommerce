@@ -12,6 +12,7 @@
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@heroicons/react": "^2.1.5",
     "@popperjs/core": "^2.11.8",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",

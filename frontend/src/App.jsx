@@ -11,10 +11,13 @@ import Home from "./pages/Home";
 import { productsLoader } from "./services/productService";
 import Login from "./pages/Authentication/Login";
 import LoadErrorPage from "./pages/Errors/ErrorPage";
-import CategoryPage from "./pages/Category";
+import CategoryPage from "./pages/Categories/Category";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/Contact";
-import useAuthContext from "./hooks/useAuthContext";
+// import useAuthContext from "./hooks/useAuthContext";
+import CategoryLayout from "./layouts/CategoryLayout";
+import { productCategory } from "./services/productCategory";
+import CategoryProducts from "./pages/Categories/CategoryProducts";
 function App() {
   // const { user } = useAuthContext()
 
@@ -24,9 +27,16 @@ function App() {
         <Route errorElement={<LoadErrorPage />}>
           <Route path="/" element={<RootLayout />}>
             <Route index loader={productsLoader} element={<Home />} />
-            <Route path= 'shop' element = { <CategoryPage/>}/>
-            <Route path="about" element = {<AboutUs/>} />
-            <Route path="contact" element = {<ContactUs/>}/>
+            <Route path="shop" element={<CategoryLayout />}>
+              <Route index element={<CategoryPage />} />
+              <Route
+                path=":path"
+                loader={productCategory}
+                element={<CategoryProducts/>}
+              />
+            </Route>
+            <Route path="about" element={<AboutUs />} />
+            <Route path="contact" element={<ContactUs />} />
           </Route>
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
